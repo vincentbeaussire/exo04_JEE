@@ -29,7 +29,7 @@ public class CatServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("cats", catList);
-        req.getRequestDispatcher("/WEB-INF/cat/list.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/cat.jsp").forward(req, resp);
     }
 
     @Override
@@ -39,10 +39,9 @@ public class CatServlet extends HttpServlet {
         String favoriteMeal = req.getParameter("favoritemeal");
         LocalDate birthDate = LocalDate.parse(req.getParameter("birthdate"));
 
-        System.out.println("name :" + name);
-        System.out.println("breed :" + breed);
-        System.out.println("favoritemeal :" + favoriteMeal);
-        System.out.println("birthdate :" + birthDate);
+        Cat cat = new Cat(name, breed, favoriteMeal, birthDate);
+        catList.add(cat);
+
         doGet(req, resp);
     }
 }
